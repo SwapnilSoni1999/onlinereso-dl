@@ -7,7 +7,7 @@ import os
 @click.option("-p", "--password", prompt="Enter password", required=True)
 @click.option("-n", "--notes", required=True, help="A notes.txt file which creates a notes/ folder and saves all pdf inside.")
 def run(username, password, notes):
-    if os.path.exists(notes) == False:
+    if os.path.exists(notes.replace('.txt', '')) == False:
         os.mkdir(notes.replace('.txt', ''))
     client = Client()
     client.login(username, password)
