@@ -26,13 +26,17 @@ class Client(Session):
             exit(-1)
 
     def __extract_note_id(self, note_url: str):
-        note_id = re.search(r"https?.+onlinereso.in\/note\/(.+)", note_url).group(1)
-        if note_id:
-            return note_id
-        else:
-            print("[Err] Not a onlinereso.com url! exiting...")
+        try:
+            note_id = re.search(r"https?.+onlinereso.in\/note\/(.+)", note_url).group(1)
+            if note_id:
+                return note_id
+            else:
+                print("[Err] Not a onlinereso.com url! exiting...")
+                exit(-1)
+        except:
+            print("Not a notes url!! please fix your notes file")
             exit(-1)
-
+            
     def get_note_id(self, note_url: str):
         """ Extracts note id from given url """
         note_id = self.__extract_note_id(note_url)
